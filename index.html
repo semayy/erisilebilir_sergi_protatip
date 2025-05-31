@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sergi Erişilebilirlik Uygulaması</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1a202c; /* Dark background */
-            color: #e2e8f0; /* Light text for contrast */
+            background-color: #f8f8f8; /* White background */
+            color: #333333; /* Dark text for contrast */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -19,38 +19,39 @@
             padding: 1rem;
         }
         .container {
-            background-color: #2d3748; /* Slightly lighter dark for container */
+            background-color: #ffffff; /* Pure white for container */
             padding: 2.5rem;
             border-radius: 1rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            max-width: 800px; /* Increased max-width for better layout */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Lighter shadow */
+            max-width: 800px;
             width: 100%;
             text-align: center;
         }
-        h1, h3 {
-            color: #9f7aea; /* Purple accent for headings */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif; /* More distinguished heading font */
+            color: #dc2626; /* Red accent for headings */
         }
         .file-input-label {
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 1rem 1.5rem;
-            border: 2px dashed #4a5568; /* Darker gray border */
+            border: 2px dashed #fca5a5; /* Light red border */
             border-radius: 0.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            color: #a0aec0; /* Light gray text */
+            color: #ef4444; /* Red text */
         }
         .file-input-label:hover {
-            border-color: #805ad5; /* Darker purple on hover */
-            color: #d6bcfa; /* Lighter purple on hover */
+            border-color: #ef4444; /* Darker red on hover */
+            color: #b91c1c; /* Even darker red on hover */
         }
         .file-input-label svg {
             margin-right: 0.5rem;
         }
         .loading-spinner {
             border: 4px solid rgba(255, 255, 255, 0.2);
-            border-left-color: #9f7aea; /* Purple spinner */
+            border-left-color: #dc2626; /* Red spinner */
             border-radius: 50%;
             width: 24px;
             height: 24px;
@@ -70,26 +71,26 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.7); /* Darker overlay */
+            background-color: rgba(0,0,0,0.5); /* Lighter overlay */
             align-items: center;
             justify-content: center;
         }
 
         .modal-content {
-            background-color: #2d3748; /* Dark modal content */
+            background-color: #ffffff; /* White modal content */
             margin: auto;
             padding: 30px;
             border-radius: 1rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             max-width: 600px;
             width: 90%;
             position: relative;
             animation: fadeIn 0.3s ease-out;
-            color: #e2e8f0; /* Light text */
+            color: #333333; /* Dark text */
         }
 
         .close-button {
-            color: #a0aec0; /* Light gray close button */
+            color: #6b7280; /* Dark gray close button */
             float: right;
             font-size: 28px;
             font-weight: bold;
@@ -101,7 +102,7 @@
 
         .close-button:hover,
         .close-button:focus {
-            color: #ffffff; /* White on hover */
+            color: #1f2937; /* Even darker on hover */
             text-decoration: none;
             cursor: pointer;
         }
@@ -112,14 +113,14 @@
         .voice-assistant-status {
             font-size: 0.875rem;
             margin-top: 0.5rem;
-            color: #a0aec0;
+            color: #6b7280;
         }
         .voice-assistant-status.listening {
-            color: #a7f3d0; /* Light green for listening */
+            color: #22c55e; /* Green for listening */
             font-weight: 600;
         }
         .copy-button {
-            background-color: #059669; /* Darker green */
+            background-color: #10b981; /* Green */
             color: white;
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
@@ -127,160 +128,244 @@
             transition: background-color 0.3s ease;
         }
         .copy-button:hover {
-            background-color: #047857; /* Even darker green on hover */
+            background-color: #059669; /* Darker green on hover */
         }
         /* Output boxes */
         #descriptionOutput, #emotionalOutput, #artworkInfoOutput, #questionOutput {
-            background-color: #2a4365; /* Darker blue/indigo shade */
-            border: 1px solid #4299e1; /* Blue border */
-            color: #e2e8f0; /* Light text */
+            background-color: #fef2f2; /* Very light red/pink */
+            border: 1px solid #ef4444; /* Red border */
+            color: #333333; /* Dark text */
         }
         #descriptionTitle, #emotionalTitle, #artworkInfoTitle, #answerTitle {
-            color: #90cdf4; /* Lighter blue for titles */
+            color: #dc2626; /* Red for titles */
         }
         /* Input fields */
         textarea, select {
-            background-color: #4a5568; /* Darker gray for inputs */
-            color: #e2e8f0; /* Light text */
-            border-color: #4a5568;
+            background-color: #f3f4f6; /* Light gray for inputs */
+            color: #333333; /* Dark text */
+            border-color: #e5e7eb;
         }
         textarea::placeholder {
-            color: #a0aec0;
+            color: #9ca3af;
         }
         textarea:focus, select:focus {
-            border-color: #6366f1;
-            ring-color: #6366f1;
+            border-color: #dc2626; /* Red focus */
+            ring-color: #f87171; /* Lighter red ring */
         }
         /* Buttons */
-        .bg-indigo-600 { background-color: #5a67d8; } /* Adjusted indigo */
-        .hover:bg-indigo-700:hover { background-color: #4c51bf; }
-        .bg-purple-600 { background-color: #805ad5; } /* Adjusted purple */
-        .hover:bg-purple-700:hover { background-color: #6b46c1; }
-        .bg-pink-600 { background-color: #d53f8c; } /* Adjusted pink */
-        .hover:bg-pink-700:hover { background-color: #b83280; }
-        .bg-green-600 { background-color: #38a169; } /* Adjusted green */
-        .hover:bg-green-700:hover { background-color: #2f855a; }
-        .bg-blue-600 { background-color: #3182ce; } /* Adjusted blue for TİD */
-        .hover:bg-blue-700:hover { background-color: #2b6cb0; }
-        .bg-yellow-600 { background-color: #d69e2e; } /* Adjusted yellow for QR */
-        .hover:bg-yellow-700:hover { background-color: #b7791f; }
-        .bg-gray-700 { background-color: #4a5568; } /* Darker gray for voice assistant button */
-        .hover:bg-gray-600:hover { background-color: #718096; }
-        .text-red-500 { color: #fc8181; } /* Lighter red for errors */
-        .mic-icon-active { color: #fc8181; } /* Red for active mic */
+        .btn-outline {
+            background-color: #ffffff; /* White background */
+            border: 2px solid; /* Border will be set by color utility */
+            color: inherit; /* Text color will be set by color utility */
+            transition: all 0.3s ease;
+        }
+        .btn-outline:hover {
+            color: white; /* Text color becomes white on hover */
+        }
+
+        /* Specific button colors and hover effects */
+        .btn-red { border-color: #dc2626; color: #dc2626; }
+        .btn-red:hover { background-color: #dc2626; }
+
+        .btn-purple { border-color: #ef4444; color: #ef4444; }
+        .btn-purple:hover { background-color: #ef4444; }
+
+        .btn-pink { border-color: #f43f5e; color: #f43f5e; }
+        .btn-pink:hover { background-color: #f43f5e; }
+
+        .btn-green { border-color: #22c55e; color: #22c55e; }
+        .btn-green:hover { background-color: #22c55e; }
+
+        .btn-blue { border-color: #3b82f6; color: #3b82f6; }
+        .btn-blue:hover { background-color: #3b82f6; }
+
+        .btn-yellow { border-color: #f59e0b; color: #f59e0b; }
+        .btn-yellow:hover { background-color: #f59e0b; }
+        
+        .btn-gray { border-color: #6b7280; color: #6b7280; }
+        .btn-gray:hover { background-color: #6b7280; }
+
+        .text-red-500 { color: #ef4444; } /* Red for errors */
+        .mic-icon-active { color: #ef4444; } /* Red for active mic */
         .sign-language-video-placeholder {
-            background-color: #1a202c;
-            border: 2px dashed #4a5568;
-            color: #a0aec0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 200px; /* Fixed height for placeholder */
-            margin-top: 1.5rem;
-            border-radius: 0.5rem;
-            font-style: italic;
-            padding: 1rem;
-            text-align: center;
+            background-color: #fef2f2; /* Very light red/pink */
+            border: 2px dashed #ef4444; /* Red border */
+            color: #dc2626; /* Red text */
         }
         /* QR Scanner specific styles */
         #qrScannerModal .modal-content {
-            max-width: 400px; /* Smaller modal for scanner */
+            max-width: 400px;
         }
         #video {
-            width: 100%;
-            height: auto;
-            border-radius: 0.5rem;
-            margin-bottom: 1rem;
-            background-color: black;
-        }
-        #canvas {
-            display: none; /* Canvas is for processing, not display */
+            background-color: #1a202c; /* Dark background for video */
         }
 
-        /* Styles from the provided index (3).html - adapted for dark theme */
+        /* Styles from the provided index (3).html - adapted for new theme */
         .elegant-card {
-            background-color: #2d3748; /* Darker background for cards */
-            backdrop-filter: blur(5px); /* Keep blur for elegance */
-            color: #e2e8f0; /* Light text */
+            background-color: #ffffff; /* White background for cards */
+            backdrop-filter: blur(5px);
+            color: #333333; /* Dark text */
         }
         .elegant-border {
-            border: 1px solid #4a5568; /* Darker border */
+            border: 1px solid #e5e7eb; /* Light gray border */
         }
         .elegant-shadow {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Stronger shadow for dark theme */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Lighter shadow */
         }
-        .icon-container {
-            background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%); /* Darker gradient */
-        }
-        .icon-container svg {
-            color: #9f7aea; /* Purple icon color */
-        }
+        /* Icon container styles removed as icons are removed */
         .feature-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Stronger hover shadow */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* Lighter hover shadow */
         }
         .voice-assistant-panel {
-            background-color: #2d3748; /* Darker panel */
-            color: #e2e8f0;
+            background-color: #ffffff; /* White panel */
+            color: #333333;
+            position: fixed;
+            bottom: 6rem;
+            right: 1rem;
+            width: 90%;
+            max-width: 350px;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            z-index: 999;
+        }
+        .voice-assistant-panel.active {
+            transform: translateY(0);
+            opacity: 1;
         }
         .voice-assistant-messages {
-            background-color: #1a202c; /* Even darker for messages */
+            background-color: #f3f4f6; /* Light gray for messages */
             border-radius: 0.5rem;
             padding: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
         }
         .assistant-message {
-            background-color: #2a4365; /* Dark blue for assistant */
-            color: #e2e8f0;
+            background-color: #fee2e2; /* Very light red for assistant */
+            color: #333333;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            align-self: flex-start;
+            text-align: left;
         }
         .user-message {
-            background-color: #5a67d8; /* Indigo for user */
+            background-color: #ef4444; /* Red for user */
             color: #ffffff;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            align-self: flex-end;
+            text-align: right;
         }
         .listening-animation span {
-            background-color: #9f7aea; /* Purple animation bars */
+            background-color: #dc2626; /* Red animation bars */
         }
-        .text-gray-600, .text-gray-700, .text-gray-800, .text-indigo-900 {
-            color: #e2e8f0 !important; /* Ensure all text is light */
+
+        .voice-assistant-button {
+            position: fixed; /* Ensures it stays in place */
+            bottom: 1rem; /* Distance from bottom */
+            right: 1rem; /* Distance from right */
+            background-color: #dc2626; /* Red button */
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+            z-index: 1000; /* Ensures it's on top of other content */
         }
-        .bg-gray-50, .bg-indigo-50, .bg-red-50, .bg-amber-50, .bg-green-50 {
-            background-color: #4a5568 !important; /* Darker backgrounds for nested cards/status */
-            color: #e2e8f0 !important;
+        .voice-assistant-button:hover {
+            background-color: #b91c1c; /* Darker red on hover */
         }
-        .text-green-700 { color: #a7f3d0 !important; } /* Light green for status */
-        .text-amber-700 { color: #fcd34d !important; } /* Light yellow for status */
-        .text-red-800 { color: #fc8181 !important; } /* Light red for status */
-        .text-indigo-600 { color: #9f7aea !important; } /* Purple for links/buttons */
-        .hover\:bg-indigo-50:hover { background-color: #4a5568 !important; } /* Darker hover for lists */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); } /* Red pulse */
+            70% { box-shadow: 0 0 0 15px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+
+        /* Ensure all text is dark on light backgrounds */
+        .text-gray-300, .text-gray-400, .text-gray-500, .text-gray-600, .text-gray-700, .text-gray-800, .text-indigo-900 {
+            color: #333333 !important;
+        }
+        /* Specific overrides for status texts to keep their meaning */
+        .text-green-700 { color: #16a34a !important; }
+        .text-amber-700 { color: #d97706 !important; }
+        .text-red-800 { color: #b91c1c !important; }
+        .text-blue-200 { color: #2563eb !important; } /* Blue for welcome message */
+        .text-blue-300 { color: #2563eb !important; } /* Blue for description title */
+        .text-pink-300 { color: #e11d48 !important; } /* Pink for emotional title */
+        .text-purple-300 { color: #8b5cf6 !important; } /* Purple for artwork info title (kept purple as it's not a primary red tone) */
+        .text-green-300 { color: #16a34a !important; } /* Green for answer title */
+        .text-indigo-600 { color: #dc2626 !important; } /* Red for links/buttons */
+        .text-indigo-700 { color: #b91c1c !important; } /* Darker red for links/buttons */
+        .hover\:bg-indigo-50:hover { background-color: #f3f4f6 !important; } /* Light gray hover for lists */
         .btn-elegant {
-            background-color: #4a5568; /* Darker background for elegant buttons */
-            color: #e2e8f0;
-            border-color: #4a5568;
+            background-color: #f3f4f6; /* Light gray for elegant buttons */
+            color: #333333;
+            border-color: #e5e7eb;
         }
         .btn-elegant:hover {
-            background-color: #718096; /* Lighter grey on hover */
-            color: #ffffff;
+            background-color: #e5e7eb; /* Lighter gray on hover */
+            color: #1f2937;
         }
-        .btn-elegant.bg-indigo-900 { background-color: #5a67d8; }
-        .btn-elegant.bg-indigo-700 { background-color: #805ad5; }
-        .btn-elegant.bg-white { background-color: #4a5568; border-color: #4a5568; }
-        .btn-elegant.bg-white:hover { background-color: #718096; }
-        .high-contrast .bg-indigo-900 { background-color: #fff !important; color: #000 !important; } /* High contrast button */
-        .high-contrast .bg-indigo-700 { background-color: #fff !important; color: #000 !important; } /* High contrast button */
+        /* High contrast mode buttons */
+        .high-contrast .btn-outline {
+            border-color: #fff !important;
+            color: #fff !important;
+            background-color: #000 !important;
+        }
+        .high-contrast .btn-outline:hover {
+            background-color: #333 !important;
+        }
+        .high-contrast .bg-indigo-900 { background-color: #000 !important; color: #fff !important; } /* High contrast button */
+        .high-contrast .bg-indigo-700 { background-color: #000 !important; color: #fff !important; } /* High contrast button */
 
         /* Footer styling */
         footer {
-            color: #a0aec0; /* Lighter gray for footer text */
+            color: #6b7280; /* Darker gray for footer text */
         }
         footer .bg-indigo-200 {
-            background-color: #9f7aea; /* Purple line in footer */
+            background-color: #ef4444; /* Red line in footer */
         }
 
         /* Screen reader mode styling */
         .screen-reader-mode .screen-reader-text {
-            background: #2d3748; /* Darker background for screen reader text */
-            color: #e2e8f0; /* Light text */
-            border-color: #4a5568; /* Darker border */
+            background: #e5e7eb; /* Light gray background for screen reader text */
+            color: #333333; /* Dark text */
+            border-color: #9ca3af; /* Medium gray border */
+        }
+
+        /* Tab specific styles */
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-bottom: 2px solid transparent;
+            font-weight: 600;
+            color: #6b7280;
+            transition: all 0.3s ease;
+        }
+        .tab-button.active {
+            border-color: #dc2626; /* Red active tab */
+            color: #dc2626;
+        }
+        .tab-button:hover {
+            color: #dc2626;
+        }
+        .tab-content {
+            display: none;
+            padding-top: 1.5rem;
+        }
+        .tab-content.active {
+            display: block;
         }
     </style>
 </head>
@@ -288,9 +373,9 @@
 
     <div class="container">
         <h1 class="text-3xl font-bold mb-6">Sergi Erişilebilirlik Uygulaması</h1>
-        <p class="text-gray-300 mb-6">Sergi ziyaretinizi kolaylaştırmak için tasarlanmış özellikler.</p>
+        <p class="text-gray-700 mb-6">Sergi ziyaretinizi kolaylaştırmak için tasarlanmış özellikler.</p>
 
-        <div id="welcomeMessage" class="bg-blue-900/50 p-4 rounded-lg mb-6 text-blue-200 hidden" role="status" aria-live="polite">
+        <div id="welcomeMessage" class="bg-blue-600/50 p-4 rounded-lg mb-6 text-blue-200 hidden" role="status" aria-live="polite">
             <p class="font-semibold">Hoş geldiniz!</p>
             <p>Bu uygulama görselleri sesli betimler, sorularınızı yanıtlar ve sergi gezintinizi kolaylaştırır. Sesli asistanı başlatmak için aşağıdaki butona tıklayabilirsiniz.</p>
         </div>
@@ -298,23 +383,17 @@
         <header class="mb-10">
             <div class="flex flex-wrap justify-center gap-4 mt-10">
                 <div class="accessibility-controls flex flex-wrap items-center gap-4 elegant-card p-4 rounded-xl elegant-shadow">
-                    <span class="text-gray-300 font-medium">Yazı Boyutu:</span>
-                    <button id="decreaseText" class="btn-elegant text-gray-300 font-medium py-2 px-4 rounded-full transition elegant-border">A-</button>
-                    <button id="resetText" class="btn-elegant text-gray-300 font-medium py-2 px-4 rounded-full transition elegant-border">A</button>
-                    <button id="increaseText" class="btn-elegant text-gray-300 font-medium py-2 px-4 rounded-full transition elegant-border">A+</button>
+                    <span class="text-gray-700 font-medium">Yazı Boyutu:</span>
+                    <button id="decreaseText" class="btn-outline btn-gray font-medium py-2 px-4 rounded-full transition">A-</button>
+                    <button id="resetText" class="btn-outline btn-gray font-medium py-2 px-4 rounded-full transition">A</button>
+                    <button id="increaseText" class="btn-outline btn-gray font-medium py-2 px-4 rounded-full transition">A+</button>
                     
-                    <span class="text-gray-300 font-medium ml-4">Mod:</span>
-                    <button id="toggleContrast" class="btn-elegant bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-full transition flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
-                        </svg>
+                    <span class="text-gray-700 font-medium ml-4">Mod:</span>
+                    <button id="toggleContrast" class="btn-outline btn-red font-medium py-2 px-4 rounded-full transition">
                         Yüksek Kontrast
                     </button>
                     
-                    <button id="toggleScreenReader" class="btn-elegant bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-full transition flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                        </svg>
+                    <button id="toggleScreenReader" class="btn-outline btn-purple font-medium py-2 px-4 rounded-full transition">
                         Ekran Okuyucu Modu
                     </button>
                 </div>
@@ -322,106 +401,153 @@
         </header>
     
         <main>
-            <section class="mb-20">
+            <section class="mb-10">
                 <h2 class="text-3xl font-bold text-indigo-900 mb-10 text-center">Erişilebilirlik Özellikleri</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="feature-card elegant-card rounded-2xl elegant-shadow overflow-hidden cursor-pointer h-full" data-feature="audio-guide">
                         <div class="p-8 flex flex-col items-center text-center">
-                            <div class="icon-container">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m0 0l-2.828 2.828m0 0a9 9 0 010-12.728m2.828 2.828a5 5 0 00-1.414 1.414" />
-                                </svg>
-                            </div>
                             <h3 class="text-2xl font-semibold mb-3">Sesli Rehber</h3>
-                            <p class="text-gray-300">Sergi hakkında detaylı sesli açıklamalar ve yönlendirmeler</p>
+                            <p class="text-gray-700">Sergi hakkında detaylı sesli açıklamalar ve yönlendirmeler</p>
                             <span class="screen-reader-text">Sesli rehber özelliğini açmak için tıklayın</span>
                         </div>
                     </div>
                     
                     <div class="feature-card elegant-card rounded-2xl elegant-shadow overflow-hidden cursor-pointer h-full" data-feature="accessible-map">
                         <div class="p-8 flex flex-col items-center text-center">
-                            <div class="icon-container">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-                                </svg>
-                            </div>
                             <h3 class="text-2xl font-semibold mb-3">Erişilebilir Harita</h3>
-                            <p class="text-gray-300">Engelsiz rotaları ve tesisleri gösteren interaktif harita</p>
+                            <p class="text-gray-700">Engelsiz rotaları ve tesisleri gösteren interaktif harita</p>
                             <span class="screen-reader-text">Erişilebilir haritayı görüntülemek için tıklayın</span>
                         </div>
                     </div>
                     
                     <div class="feature-card elegant-card rounded-2xl elegant-shadow overflow-hidden cursor-pointer h-full" data-feature="artwork-info">
                         <div class="p-8 flex flex-col items-center text-center">
-                            <div class="icon-container">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
                             <h3 class="text-2xl font-semibold mb-3">Eser Bilgileri</h3>
-                            <p class="text-gray-300">Detaylı ve erişilebilir eser açıklamaları ve bilgileri</p>
+                            <p class="text-gray-700">Detaylı ve erişilebilir eser açıklamaları ve bilgileri</p>
                             <span class="screen-reader-text">Eser bilgilerini görüntülemek için tıklayın</span>
                         </div>
                     </div>
                     
                     <div class="feature-card elegant-card rounded-2xl elegant-shadow overflow-hidden cursor-pointer h-full" data-feature="emotion-analysis">
                         <div class="p-8 flex flex-col items-center text-center">
-                            <div class="icon-container">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
                             <h3 class="text-2xl font-semibold mb-3">Duygu Analizi</h3>
-                            <p class="text-gray-300">Eserlerin duygusal tonunu ve yarattığı hissi keşfedin.</p>
+                            <p class="text-gray-700">Eserlerin duygusal tonunu ve yarattığı hissi keşfedin.</p>
                             <span class="screen-reader-text">Duygu analizi özelliğini açmak için tıklayın</span>
                         </div>
                     </div>
 
                     <div class="feature-card elegant-card rounded-2xl elegant-shadow overflow-hidden cursor-pointer h-full" data-feature="qr-scanner">
                         <div class="p-8 flex flex-col items-center text-center">
-                            <div class="icon-container">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 11h8V3H3v8zm0 10h8v-8H3v8zm10 0h8v-8h-8v8zm0-10h8V3h-8v8z" />
-                                </svg>
-                            </div>
                             <h3 class="text-2xl font-semibold mb-3">QR Kodu Tara</h3>
-                            <p class="text-gray-300">Eser bilgilerine hızlıca erişmek için QR kodlarını tarayın.</p>
+                            <p class="text-gray-700">Eser bilgilerine hızlıca erişmek için QR kodlarını tarayın.</p>
                             <span class="screen-reader-text">QR kod tarayıcıyı açmak için tıklayın</span>
                         </div>
                     </div>
                     
                     <div class="feature-card elegant-card rounded-2xl elegant-shadow overflow-hidden cursor-pointer h-full" data-feature="help-support">
                         <div class="p-8 flex flex-col items-center text-center">
-                            <div class="icon-container">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </div>
                             <h3 class="text-2xl font-semibold mb-3">Yardım ve Destek</h3>
-                            <p class="text-gray-300">Acil yardım çağırma ve geri bildirim seçenekleri</p>
+                            <p class="text-gray-700">Acil yardım çağırma ve geri bildirim seçenekleri</p>
                             <span class="screen-reader-text">Yardım ve destek seçeneklerini görüntülemek için tıklayın</span>
                         </div>
                     </div>
                 </div>
             </section>
-            
-            <section class="mb-16">
+
+            <div class="flex justify-center border-b border-gray-200 mb-8">
+                <button class="tab-button active" data-tab="visual-analysis">Görsel Analiz & Bilgi</button>
+                <button class="tab-button" data-tab="current-exhibitions">Güncel Sergiler</button>
+            </div>
+
+            <section id="visual-analysis" class="tab-content active mb-20">
+                <h2 class="text-3xl font-bold text-indigo-900 mb-10 text-center">Görsel Analiz ve Bilgi ✨</h2>
                 <div class="elegant-card rounded-2xl elegant-shadow p-8">
-                    <h2 class="text-3xl font-bold text-indigo-900 mb-8 text-center">Güncel Sergiler</h2>
+                    <p class="text-gray-700 mb-6">Bir görsel yükleyerek veya QR kodu tarayarak yapay zeka destekli analiz ve bilgilere ulaşın.</p>
+
+                    <div class="mb-6">
+                        <label for="imageUpload" class="file-input-label">
+                            <span>Görsel Seçin veya Sürükleyin</span>
+                        </label>
+                        <input type="file" id="imageUpload" accept="image/*" class="hidden">
+                    </div>
+
+                    <div id="imagePreviewContainer" class="mb-6 hidden">
+                        <img id="imagePreview" src="#" alt="Görsel Önizlemesi" class="max-w-full h-auto rounded-lg mx-auto shadow-md">
+                    </div>
+
+                    <div class="mb-6">
+                        <label for="descriptionLevel" class="block text-gray-700 text-sm font-medium mb-2 text-left">Betimleme Seviyesi:</label>
+                        <select id="descriptionLevel" class="w-full p-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="simple">Basit (Ana öğeler ve genel atmosfer)</option>
+                            <option value="complex">Kapsamlı (Detaylı sanatsal ve duygusal analiz)</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <button id="describeImageButton" class="btn-outline btn-red font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105 flex items-center justify-center gap-2" disabled>
+                            <span id="buttonText">Görseli Betimle</span>
+                            <div id="loadingSpinner" class="loading-spinner hidden"></div>
+                        </button>
+                        <button id="analyzeEmotionButton" class="btn-outline btn-pink font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105 flex items-center justify-center gap-2" disabled>
+                            <span>Duygu Analizi</span>
+                            <div class="loading-spinner hidden"></div>
+                        </button>
+                        <button id="getArtworkInfoButton" class="btn-outline btn-purple font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105 flex items-center justify-center gap-2" disabled>
+                            <span>Sanatçı ve Eser Bilgisi</span>
+                            <div class="loading-spinner hidden"></div>
+                        </button>
+                        <button id="openAskQuestionModalButton" class="btn-outline btn-green font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105 flex items-center justify-center gap-2" disabled>
+                            <span>Görsel Hakkında Soru Sor</span>
+                            <div class="loading-spinner hidden"></div>
+                        </button>
+                    </div>
+
+                    <div id="errorMessage" class="bg-red-50 p-4 rounded-lg text-red-500 mb-4 hidden" role="alert"></div>
+
+                    <div id="descriptionOutput" class="mt-6 p-4 rounded-lg text-left border border-blue-400 bg-blue-900/20 hidden" role="region">
+                        <h4 id="descriptionTitle" class="font-medium text-blue-300 mb-2">Görsel Betimlemesi:</h4>
+                        <p id="descriptionText" class="whitespace-pre-wrap text-gray-700"></p>
+                        <button id="copyDescriptionButton" class="copy-button mt-3">Panoya Kopyala</button>
+                        <button id="showSignLanguageButton" class="btn-outline btn-blue font-bold py-2 px-4 rounded-lg shadow-md transition duration-300 transform hover:scale-105 mt-3 ml-2">
+                            Türkçe İşaret Dili (TİD)
+                        </button>
+                        <div id="signLanguageVideoContainer" class="sign-language-video-placeholder hidden">
+                            <p>Türkçe İşaret Dili (TİD) videosu burada yer alacaktır.</p>
+                            <p class="text-sm italic mt-2">(Gerçek bir entegrasyon için TİD video API'si veya önceden hazırlanmış videolar gereklidir.)</p>
+                        </div>
+                    </div>
+
+                    <div id="emotionalOutput" class="mt-6 p-4 rounded-lg text-left border border-pink-400 bg-pink-900/20 hidden" role="region">
+                        <h4 id="emotionalTitle" class="font-medium text-pink-300 mb-2">Duygu Analizi Sonucu:</h4>
+                        <p id="emotionalText" class="whitespace-pre-wrap text-gray-700"></p>
+                        <button id="copyEmotionalButton" class="copy-button mt-3">Panoya Kopyala</button>
+                    </div>
+
+                    <div id="artworkInfoOutput" class="mt-6 p-4 rounded-lg text-left border border-purple-400 bg-purple-900/20 hidden" role="region">
+                        <h4 id="artworkInfoTitle" class="font-medium text-purple-300 mb-2">Sanatçı ve Eser Bilgisi:</h4>
+                        <p id="artworkInfoText" class="whitespace-pre-wrap text-gray-700"></p>
+                        <button id="copyArtworkInfoButton" class="copy-button mt-3">Panoya Kopyala</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="current-exhibitions" class="tab-content mb-20">
+                <h2 class="text-3xl font-bold text-indigo-900 mb-10 text-center">Güncel Sergiler</h2>
+                <div class="elegant-card rounded-2xl elegant-shadow p-8">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div class="elegant-border rounded-xl p-6 hover:shadow-md transition-shadow">
                             <h3 class="text-xl font-semibold text-indigo-900 mb-3">Modern Sanat Sergisi</h3>
-                            <p class="text-gray-300 mb-4">A Salonu - 1. Kat</p>
+                            <p class="text-gray-700 mb-4">A Salonu - 1. Kat</p>
                             <span class="inline-block bg-green-50 text-green-700 text-xs px-3 py-1.5 rounded-full font-medium">Tamamen Erişilebilir</span>
                         </div>
                         <div class="elegant-border rounded-xl p-6 hover:shadow-md transition-shadow">
                             <h3 class="text-xl font-semibold text-indigo-900 mb-3">Tarihi Eserler</h3>
-                            <p class="text-gray-300 mb-4">B Salonu - 2. Kat</p>
+                            <p class="text-gray-700 mb-4">B Salonu - 2. Kat</p>
                             <span class="inline-block bg-amber-50 text-amber-700 text-xs px-3 py-1.5 rounded-full font-medium">Kısmen Erişilebilir</span>
                         </div>
                         <div class="elegant-border rounded-xl p-6 hover:shadow-md transition-shadow">
                             <h3 class="text-xl font-semibold text-indigo-900 mb-3">Dijital Sanat</h3>
-                            <p class="text-gray-300 mb-4">C Salonu - Giriş Kat</p>
+                            <p class="text-gray-700 mb-4">C Salonu - Giriş Kat</p>
                             <span class="inline-block bg-green-50 text-green-700 text-xs px-3 py-1.5 rounded-full font-medium">Tamamen Erişilebilir</span>
                         </div>
                     </div>
@@ -432,64 +558,55 @@
         <footer class="text-center text-gray-600 mt-20 pb-8">
             <div class="w-24 h-1 bg-indigo-200 mx-auto mb-6 rounded-full"></div>
             <p>© 2025 Sergi Erişilebilirlik Uygulaması | Tüm Hakları Saklıdır</p>
+            <p class="mt-4 text-gray-700">Bu prototip Görsel İletişim Tasarımı ve Dijital Dönüşüm Uzmanı Semanur Ayyıldız tarafından oluşturulmuştur.</p>
+            <div class="flex justify-center items-center gap-4 mt-3">
+                <a href="tel:+905079448462" class="btn-outline btn-red font-medium py-2 px-4 rounded-full transition">Telefon Et</a>
+                <a href="https://www.linkedin.com/in/semayy/" target="_blank" rel="noopener noreferrer" class="btn-outline btn-blue font-medium py-2 px-4 rounded-full transition">LinkedIn</a>
+            </div>
         </footer>
     </div>
 
-    <div class="voice-assistant-container">
-        <div id="voice-assistant-button" class="voice-assistant-button">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-            </svg>
+    <div id="voice-assistant-button" class="voice-assistant-button">
+        Konuş
+    </div>
+
+    <div id="voice-assistant-panel" class="voice-assistant-panel hidden">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold text-indigo-900">Sesli Asistan</h3>
+            <button id="close-assistant" class="text-gray-500 hover:text-gray-700">
+                &times;
+            </button>
         </div>
         
-        <div id="voice-assistant-panel" class="voice-assistant-panel hidden elegant-shadow">
-            <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-indigo-900">Sesli Asistan</h3>
-                <button id="close-assistant" class="text-gray-500 hover:text-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+        <div id="voice-assistant-messages" class="voice-assistant-messages">
+            <div class="voice-message assistant-message">
+                <p>Merhaba! Ben sergi asistanınız. Size nasıl yardımcı olabilirim?</p>
+            </div>
+        </div>
+        
+        <div class="flex items-center gap-3 mt-4">
+            <button id="start-voice" class="btn-outline btn-red font-medium py-2 px-4 rounded-full transition flex-grow flex items-center justify-center gap-2">
+                Konuşmaya Başla
+            </button>
+            
+            <button id="type-message" class="btn-outline btn-gray font-medium p-2 rounded-full transition">
+                Yaz
+            </button>
+        </div>
+        
+        <div id="text-input-area" class="mt-3 hidden">
+            <div class="flex gap-2">
+                <input type="text" id="text-message" class="flex-grow px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Mesajınızı yazın...">
+                <button id="send-text" class="btn-outline btn-red font-medium p-2 rounded-full transition">
+                    Gönder
                 </button>
             </div>
-            
-            <div id="voice-assistant-messages" class="voice-assistant-messages">
-                <div class="voice-message assistant-message">
-                    <p>Merhaba! Ben sergi asistanınız. Size nasıl yardımcı olabilirim?</p>
-                </div>
-            </div>
-            
-            <div class="flex items-center gap-3">
-                <div id="listening-animation" class="listening-animation hidden">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-                
-                <button id="start-voice" class="btn-elegant bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-full transition flex-grow flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                    </svg>
-                    Konuşmaya Başla
-                </button>
-                
-                <button id="type-message" class="btn-elegant bg-white hover:bg-gray-100 text-indigo-600 font-medium p-2 rounded-full transition border border-indigo-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                </button>
-            </div>
-            
-            <div id="text-input-area" class="mt-3 hidden">
-                <div class="flex gap-2">
-                    <input type="text" id="text-message" class="flex-grow px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Mesajınızı yazın...">
-                    <button id="send-text" class="btn-elegant bg-indigo-600 hover:bg-indigo-700 text-white font-medium p-2 rounded-full transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
+        </div>
+        <div id="listening-animation" class="listening-animation mt-2 hidden">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </div>
 
@@ -499,9 +616,7 @@
                 <div class="flex justify-between items-center mb-6">
                     <h2 id="modal-title" class="text-3xl font-bold text-indigo-900"></h2>
                     <button id="close-modal" class="text-gray-500 hover:text-gray-700 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                        &times;
                     </button>
                 </div>
                 <div id="modal-content"></div>
@@ -509,14 +624,34 @@
         </div>
     </div>
 
+    <div id="askQuestionModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="askQuestionTitle">
+        <div class="modal-content">
+            <span class="close-button" id="closeAskQuestionModalButton" aria-label="Soru sorma ekranını kapat">&times;</span>
+            <h3 id="askQuestionTitle" class="text-xl font-bold mb-4">Görsel Hakkında Soru Sor</h3>
+            <p class="mb-4 text-gray-700">Yüklediğiniz görselle ilgili bir soru sorun, yapay zeka cevaplasın.</p>
+            <textarea id="questionInput" class="w-full p-3 rounded-lg border focus:outline-none focus:ring-2 focus:ring-green-500" rows="3" placeholder="Sorunuzu buraya yazın..."></textarea>
+            <button id="answerQuestionButton" class="btn-outline btn-green font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105 mt-4 w-full flex items-center justify-center gap-2" disabled>
+                <span id="answerQuestionButtonText">Cevapla</span>
+                <div id="answerQuestionSpinner" class="loading-spinner hidden"></div>
+            </button>
+            <p id="questionErrorMessage" class="text-red-500 text-sm mt-2 hidden" role="alert"></p>
+
+            <div id="questionOutput" class="mt-6 p-4 rounded-lg text-left border border-green-400 bg-green-900/20 hidden" role="region">
+                <h4 id="answerTitle" class="font-medium text-green-300 mb-2">Cevap:</h4>
+                <p id="answerText" class="whitespace-pre-wrap text-gray-700"></p>
+                <button id="copyAnswerButton" class="copy-button mt-3">Panoya Kopyala</button>
+            </div>
+        </div>
+    </div>
+
     <div id="qrScannerModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="qrScannerTitle">
         <div class="modal-content">
             <span class="close-button" id="closeQrScannerModalButton" aria-label="QR tarayıcıyı kapat">&times;</span>
-            <h3 id="qrScannerTitle" class="text-xl font-bold mb-4">QR Kodu Tara ✨</h3>
-            <p class="mb-4 text-gray-300">Lütfen kameranızı QR koduna doğru tutun.</p>
+            <h3 id="qrScannerTitle" class="text-xl font-bold mb-4">QR Kodu Tara</h3>
+            <p class="mb-4 text-gray-700">Lütfen kameranızı QR koduna doğru tutun.</p>
             <video id="video" playsinline></video>
             <canvas id="canvas" class="hidden"></canvas>
-            <p id="qrStatus" class="text-gray-400 mt-2" aria-live="polite">Kamera bekleniyor...</p>
+            <p id="qrStatus" class="text-gray-700 mt-2" aria-live="polite">Kamera bekleniyor...</p>
             <p id="qrErrorMessage" class="text-red-500 text-sm mt-2 hidden" role="alert" aria-live="assertive"></p>
         </div>
     </div>
@@ -579,8 +714,8 @@
             const closeModal = document.getElementById('close-modal');
             
             function openModal(title, content) {
-                modalTitle.textContent = title;
-                modalContent.innerHTML = content;
+                if (modalTitle) modalTitle.textContent = title;
+                if (modalContent) modalContent.innerHTML = content;
                 if (modalContainer) {
                     modalContainer.classList.remove('hidden');
                     modalContainer.classList.add('flex');
@@ -620,81 +755,51 @@
                                 title = 'Sesli Rehber';
                                 content = `
                                     <div class="space-y-6">
-                                        <p class="text-gray-300">Sergi deneyiminizi zenginleştirmek için sesli rehberimizi kullanabilirsiniz. Aşağıdaki sergilerden birini seçerek sesli anlatımı başlatın.</p>
+                                        <p class="text-gray-700">Sergi deneyiminizi zenginleştirmek için sesli rehberimizi kullanabilirsiniz. Aşağıdaki sergilerden birini seçerek sesli anlatımı başlatın.</p>
                                         
                                         <div class="bg-gray-50 p-6 rounded-xl">
                                             <h3 class="font-medium text-xl mb-4 text-indigo-900">Mevcut Sesli Rehberler</h3>
                                             <ul class="space-y-4">
                                                 <li>
-                                                    <button class="flex items-center w-full text-left p-4 elegant-border rounded-xl hover:bg-indigo-50 transition">
-                                                        <div class="bg-indigo-100 rounded-full p-3 mr-4">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                            </svg>
-                                                        </div>
+                                                    <button class="flex items-center w-full text-left p-4 btn-outline btn-red rounded-xl hover:bg-gray-100 transition">
                                                         <div>
                                                             <div class="font-medium text-lg text-indigo-900">Modern Sanat Sergisi</div>
-                                                            <div class="text-sm text-gray-400 mt-1">Süre: 25 dakika</div>
+                                                            <div class="text-sm text-gray-700 mt-1">Süre: 25 dakika</div>
                                                         </div>
                                                     </button>
                                                 </li>
                                                 <li>
-                                                    <button class="flex items-center w-full text-left p-4 elegant-border rounded-xl hover:bg-indigo-50 transition">
-                                                        <div class="bg-indigo-100 rounded-full p-3 mr-4">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                            </svg>
-                                                        </div>
+                                                    <button class="flex items-center w-full text-left p-4 btn-outline btn-red rounded-xl hover:bg-gray-100 transition">
                                                         <div>
                                                             <div class="font-medium text-lg text-indigo-900">Tarihi Eserler</div>
-                                                            <div class="text-sm text-gray-400 mt-1">Süre: 40 dakika</div>
+                                                            <div class="text-sm text-gray-700 mt-1">Süre: 40 dakika</div>
                                                         </div>
                                                     </button>
                                                 </li>
                                                 <li>
-                                                    <button class="flex items-center w-full text-left p-4 elegant-border rounded-xl hover:bg-indigo-50 transition">
-                                                        <div class="bg-indigo-100 rounded-full p-3 mr-4">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                            </svg>
-                                                        </div>
+                                                    <button class="flex items-center w-full text-left p-4 btn-outline btn-red rounded-xl hover:bg-gray-100 transition">
                                                         <div>
                                                             <div class="font-medium text-lg text-indigo-900">Dijital Sanat</div>
-                                                            <div class="text-sm text-gray-400 mt-1">Süre: 20 dakika</div>
+                                                            <div class="text-sm text-gray-700 mt-1">Süre: 20 dakika</div>
                                                         </div>
                                                     </button>
                                                 </li>
                                             </ul>
                                         </div>
                                         
-                                        <div class="bg-indigo-50 p-6 rounded-xl">
+                                        <div class="bg-red-50 p-6 rounded-xl">
                                             <h3 class="font-medium text-xl mb-4 text-indigo-900">Özellikler</h3>
                                             <ul class="grid grid-cols-1 md:grid-cols-2 gap-3">
                                                 <li class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                    </svg>
                                                     Detaylı eser açıklamaları
                                                 </li>
                                                 <li class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                    </svg>
                                                     Sanatçı biyografileri
                                                 </li>
                                                 <li class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                    </svg>
                                                     Tarihsel bağlam bilgileri
                                                 </li>
                                                 <li class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                    </svg>
                                                     Çoklu dil desteği
                                                 </li>
                                             </ul>
@@ -706,42 +811,42 @@
                                 title = 'Erişilebilir Harita';
                                 content = `
                                     <div class="space-y-6">
-                                        <p class="text-gray-300">Sergi alanında kolayca yön bulmanızı sağlayan erişilebilir haritamız, engelsiz rotaları, asansörleri, rampaları ve diğer erişilebilirlik özelliklerini gösterir.</p>
+                                        <p class="text-gray-700">Sergi alanında kolayca yön bulmanızı sağlayan erişilebilir haritamız, engelsiz rotaları, asansörleri, rampaları ve diğer erişilebilirlik özelliklerini gösterir.</p>
                                         
                                         <div class="elegant-border rounded-xl p-6 relative">
                                             <svg viewBox="0 0 500 300" class="w-full h-auto">
-                                                <rect x="50" y="50" width="400" height="200" fill="#2a4365" stroke="#4299e1" stroke-width="2"/>
+                                                <rect x="50" y="50" width="400" height="200" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
                                                 
-                                                <rect x="70" y="70" width="100" height="80" fill="#4299e1" stroke="#90cdf4" stroke-width="1.5"/>
-                                                <text x="120" y="110" text-anchor="middle" font-size="12" fill="#e2e8f0" font-family="Inter">A Salonu</text>
+                                                <rect x="70" y="70" width="100" height="80" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+                                                <text x="120" y="110" text-anchor="middle" font-size="12" fill="#333333" font-family="Inter">A Salonu</text>
                                                 
-                                                <rect x="190" y="70" width="100" height="80" fill="#4299e1" stroke="#90cdf4" stroke-width="1.5"/>
-                                                <text x="240" y="110" text-anchor="middle" font-size="12" fill="#e2e8f0" font-family="Inter">B Salonu</text>
+                                                <rect x="190" y="70" width="100" height="80" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+                                                <text x="240" y="110" text-anchor="middle" font-size="12" fill="#333333" font-family="Inter">B Salonu</text>
                                                 
-                                                <rect x="310" y="70" width="120" height="80" fill="#4299e1" stroke="#90cdf4" stroke-width="1.5"/>
-                                                <text x="370" y="110" text-anchor="middle" font-size="12" fill="#e2e8f0" font-family="Inter">C Salonu</text>
+                                                <rect x="310" y="70" width="120" height="80" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+                                                <text x="370" y="110" text-anchor="middle" font-size="12" fill="#333333" font-family="Inter">C Salonu</text>
                                                 
-                                                <rect x="70" y="170" width="160" height="60" fill="#4299e1" stroke="#90cdf4" stroke-width="1.5"/>
-                                                <text x="150" y="200" text-anchor="middle" font-size="12" fill="#e2e8f0" font-family="Inter">Giriş Salonu</text>
+                                                <rect x="70" y="170" width="160" height="60" fill="#fee2e2" stroke="#fca5a5" stroke-width="1.5"/>
+                                                <text x="150" y="200" text-anchor="middle" font-size="12" fill="#333333" font-family="Inter">Giriş Salonu</text>
                                                 
-                                                <path d="M150 230 L150 260 L370 260 L370 150" stroke="#a7f3d0" stroke-width="2.5" stroke-dasharray="5,5" fill="none"/>
+                                                <path d="M150 230 L150 260 L370 260 L370 150" stroke="#22c55e" stroke-width="2.5" stroke-dasharray="5,5" fill="none"/>
                                                 
-                                                <circle cx="150" cy="240" r="8" fill="#a7f3d0"/>
-                                                <text x="150" y="265" text-anchor="middle" font-size="10" fill="#e2e8f0" font-family="Inter">Giriş</text>
+                                                <circle cx="150" cy="240" r="8" fill="#22c55e"/>
+                                                <text x="150" y="265" text-anchor="middle" font-size="10" fill="#333333" font-family="Inter">Giriş</text>
                                                 
-                                                <circle cx="240" cy="90" r="8" fill="#9f7aea"/>
+                                                <circle cx="240" cy="90" r="8" fill="#dc2626"/>
                                                 <text x="240" y="90" text-anchor="middle" font-size="10" fill="white" font-family="Inter">i</text>
                                                 
-                                                <circle cx="370" cy="90" r="8" fill="#9f7aea"/>
+                                                <circle cx="370" cy="90" r="8" fill="#dc2626"/>
                                                 <text x="370" y="90" text-anchor="middle" font-size="10" fill="white" font-family="Inter">i</text>
                                                 
-                                                <circle cx="100" cy="200" r="8" fill="#d53f8c"/>
+                                                <circle cx="100" cy="200" r="8" fill="#f43f5e"/>
                                                 <text x="100" y="203" text-anchor="middle" font-size="10" fill="white">♿</text>
                                                 
-                                                <circle cx="200" cy="200" r="8" fill="#d53f8c"/>
+                                                <circle cx="200" cy="200" r="8" fill="#f43f5e"/>
                                                 <text x="200" y="203" text-anchor="middle" font-size="10" fill="white">🚻</text>
                                                 
-                                                <circle cx="330" cy="120" r="8" fill="#d53f8c"/>
+                                                <circle cx="330" cy="120" r="8" fill="#f43f5e"/>
                                                 <text x="330" y="123" text-anchor="middle" font-size="10" fill="white">🚻</text>
                                             </svg>
                                             
@@ -750,49 +855,37 @@
                                                 <div class="grid grid-cols-2 gap-4">
                                                     <div class="flex items-center">
                                                         <div class="w-5 h-5 bg-emerald-500 rounded-full mr-3"></div>
-                                                        <span class="text-gray-300">Erişilebilir Giriş</span>
+                                                        <span class="text-gray-700">Erişilebilir Giriş</span>
                                                     </div>
                                                     <div class="flex items-center">
-                                                        <div class="w-5 h-5 bg-indigo-600 rounded-full mr-3"></div>
-                                                        <span class="text-gray-300">Bilgi Noktası</span>
+                                                        <div class="w-5 h-5 bg-red-600 rounded-full mr-3"></div>
+                                                        <span class="text-gray-700">Bilgi Noktası</span>
                                                     </div>
                                                     <div class="flex items-center">
-                                                        <div class="w-5 h-5 bg-purple-500 rounded-full mr-3"></div>
-                                                        <span class="text-gray-300">Erişilebilir Tuvalet</span>
+                                                        <div class="w-5 h-5 bg-pink-600 rounded-full mr-3"></div>
+                                                        <span class="text-gray-700">Erişilebilir Tuvalet</span>
                                                     </div>
                                                     <div class="flex items-center">
                                                         <div class="w-8 h-0 border-t-2 border-dashed border-emerald-500 mr-3"></div>
-                                                        <span class="text-gray-300">Erişilebilir Rota</span>
+                                                        <span class="text-gray-700">Erişilebilir Rota</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         
-                                        <div class="bg-indigo-50 p-6 rounded-xl">
+                                        <div class="bg-red-50 p-6 rounded-xl">
                                             <h3 class="font-medium text-xl mb-4 text-indigo-900">Erişilebilirlik Bilgileri</h3>
                                             <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <li class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                    </svg>
                                                     Tüm katlara asansör erişimi
                                                 </li>
                                                 <li class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                    </svg>
                                                     Erişilebilir tuvaletler
                                                 </li>
                                                 <li class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                    </svg>
                                                     Tekerlekli sandalye ödünç alma
                                                 </li>
                                                 <li class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                                                    </svg>
                                                     Engelsiz park alanları
                                                 </li>
                                             </ul>
@@ -804,7 +897,7 @@
                                 title = 'Eser Bilgileri';
                                 content = `
                                     <div class="space-y-6">
-                                        <p class="text-gray-300">Sergimizdeki eserler hakkında detaylı bilgilere buradan erişebilirsiniz. Her eser için açıklamalar, sanatçı bilgileri ve bağlamsal bilgiler sunulmaktadır.</p>
+                                        <p class="text-gray-700">Sergimizdeki eserler hakkında detaylı bilgilere buradan erişebilirsiniz. Her eser için açıklamalar, sanatçı bilgileri ve bağlamsal bilgiler sunulmaktadır.</p>
                                         
                                         <div class="bg-gray-50 p-6 rounded-xl">
                                             <h3 class="font-medium text-xl mb-4 text-indigo-900">Öne Çıkan Eserler</h3>
@@ -812,67 +905,46 @@
                                             <div class="space-y-5">
                                                 <div class="elegant-border rounded-xl p-5 hover:shadow-md transition-shadow">
                                                     <h4 class="font-medium text-lg text-indigo-900">Mavi Kompozisyon</h4>
-                                                    <p class="text-sm text-gray-400 mt-1">Ahmet Yılmaz, 2018</p>
-                                                    <p class="mt-3 text-gray-300">Bu eser, sanatçının mavi tonlarını kullanarak yarattığı soyut bir çalışmadır. Eser, deniz ve gökyüzü arasındaki ilişkiyi yansıtmaktadır.</p>
-                                                    <button class="mt-4 text-indigo-600 hover:text-indigo-800 text-sm font-medium flex items-center">
+                                                    <p class="text-sm text-gray-700 mt-1">Ahmet Yılmaz, 2018</p>
+                                                    <p class="mt-3 text-gray-700">Bu eser, sanatçının mavi tonlarını kullanarak yarattığı soyut bir çalışmadır. Eser, deniz ve gökyüzü arasındaki ilişkiyi yansıtmaktadır.</p>
+                                                    <button class="mt-4 text-red-600 hover:text-red-800 text-sm font-medium flex items-center">
                                                         Detaylı bilgi
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                        </svg>
                                                     </button>
                                                 </div>
                                                 
                                                 <div class="elegant-border rounded-xl p-5 hover:shadow-md transition-shadow">
                                                     <h4 class="font-medium text-lg text-indigo-900">Zaman ve Mekan</h4>
-                                                    <p class="text-sm text-gray-400 mt-1">Zeynep Kaya, 2020</p>
-                                                    <p class="mt-3 text-gray-300">Bu heykel çalışması, zamanın ve mekanın akışkanlığını temsil etmektedir. Sanatçı, bronz ve cam malzemeleri kullanarak bu kavramları somutlaştırmıştır.</p>
-                                                    <button class="mt-4 text-indigo-600 hover:text-indigo-800 text-sm font-medium flex items-center">
+                                                    <p class="text-sm text-gray-700 mt-1">Zeynep Kaya, 2020</p>
+                                                    <p class="mt-3 text-gray-700">Bu heykel çalışması, zamanın ve mekanın akışkanlığını temsil etmektedir. Sanatçı, bronz ve cam malzemeleri kullanarak bu kavramları somutlaştırmıştır.</p>
+                                                    <button class="mt-4 text-red-600 hover:text-red-800 text-sm font-medium flex items-center">
                                                         Detaylı bilgi
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                        </svg>
                                                     </button>
                                                 </div>
                                                 
                                                 <div class="elegant-border rounded-xl p-5 hover:shadow-md transition-shadow">
                                                     <h4 class="font-medium text-lg text-indigo-900">Dijital Çağ</h4>
-                                                    <p class="text-sm text-gray-400 mt-1">Mehmet Demir, 2022</p>
-                                                    <p class="mt-3 text-gray-300">Bu dijital enstalasyon, teknolojinin insan yaşamına etkisini interaktif bir şekilde ele almaktadır. Ziyaretçiler, eserin bir parçası haline gelerek deneyimi tamamlamaktadır.</p>
-                                                    <button class="mt-4 text-indigo-600 hover:text-indigo-800 text-sm font-medium flex items-center">
+                                                    <p class="text-sm text-gray-700 mt-1">Mehmet Demir, 2022</p>
+                                                    <p class="mt-3 text-gray-700">Bu dijital enstalasyon, teknolojinin insan yaşamına etkisini interaktif bir şekilde ele almaktadır. Ziyaretçiler, eserin bir parçası haline gelerek deneyimi tamamlamaktadır.</p>
+                                                    <button class="mt-4 text-red-600 hover:text-red-800 text-sm font-medium flex items-center">
                                                         Detaylı bilgi
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                                        </svg>
                                                     </button>
                                                 </div>
                                             </div>
                                         </div>
                                         
-                                        <div class="bg-indigo-50 p-6 rounded-xl">
+                                        <div class="bg-red-50 p-6 rounded-xl">
                                             <h3 class="font-medium text-xl mb-4 text-indigo-900">Erişilebilirlik Özellikleri</h3>
                                             <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <li class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    </svg>
                                                     Braille alfabesi ile yazılmış açıklamalar
                                                 </li>
                                                 <li class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    </svg>
                                                     Sesli açıklamalar
                                                 </li>
                                                 <li class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    </svg>
                                                     Dokunsal reprodüksiyonlar
                                                 </li>
                                                 <li class="flex items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    </svg>
                                                     İşaret dili videoları
                                                 </li>
                                             </ul>
@@ -884,12 +956,12 @@
                                 title = 'Duygu Analizi';
                                 content = `
                                     <div class="space-y-6">
-                                        <p class="text-gray-300">Bu özellik, yüklediğiniz görselin duygusal tonunu ve izleyicide uyandırabileceği hisleri yapay zeka aracılığıyla analiz eder.</p>
+                                        <p class="text-gray-700">Bu özellik, yüklediğiniz görselin duygusal tonunu ve izleyicide uyandırabileceği hisleri yapay zeka aracılığıyla analiz eder.</p>
                                         <div class="elegant-border rounded-xl p-6">
-                                            <p class="text-gray-300">Lütfen bir görsel yükleyin veya QR kodu tarayarak bir eser seçin. Duygu analizi otomatik olarak yapılacaktır.</p>
+                                            <p class="text-gray-700">Lütfen bir görsel yükleyin veya QR kodu tarayarak bir eser seçin. Duygu analizi otomatik olarak yapılacaktır.</p>
                                             <div id="modalEmotionOutput" class="mt-4 p-4 rounded-lg text-left hidden" role="region">
-                                                <p class="font-medium text-pink-400 mb-2">Analiz Sonucu:</p>
-                                                <p id="modalEmotionText" class="whitespace-pre-wrap text-gray-300"></p>
+                                                <p class="font-medium text-pink-300 mb-2">Analiz Sonucu:</p>
+                                                <p id="modalEmotionText" class="whitespace-pre-wrap text-gray-700"></p>
                                             </div>
                                         </div>
                                     </div>
@@ -899,10 +971,10 @@
                                 title = 'QR Kodu Tara';
                                 content = `
                                     <div class="space-y-6">
-                                        <p class="text-gray-300">Sergideki eserlerin QR kodlarını tarayarak anında bilgilere ulaşın.</p>
+                                        <p class="text-gray-700">Sergideki eserlerin QR kodlarını tarayarak anında bilgilere ulaşın.</p>
                                         <div class="elegant-border rounded-xl p-6">
-                                            <p class="text-gray-300">QR tarayıcıyı başlatmak için aşağıdaki butona tıklayın.</p>
-                                            <button id="startModalQrScannerButton" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105 mt-4 w-full">
+                                            <p class="text-gray-700">QR tarayıcıyı başlatmak için aşağıdaki butona tıklayın.</p>
+                                            <button id="startModalQrScannerButton" class="btn-outline btn-yellow font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 transform hover:scale-105 mt-4 w-full">
                                                 QR Tarayıcıyı Başlat
                                             </button>
                                         </div>
@@ -913,15 +985,12 @@
                                 title = 'Yardım ve Destek';
                                 content = `
                                     <div class="space-y-6">
-                                        <p class="text-gray-300">Sergi ziyaretiniz sırasında herhangi bir yardıma ihtiyacınız olursa, aşağıdaki seçenekleri kullanabilirsiniz.</p>
+                                        <p class="text-gray-700">Sergi ziyaretiniz sırasında herhangi bir yardıma ihtiyacınız olursa, aşağıdaki seçenekleri kullanabilirsiniz.</p>
                                         
                                         <div class="bg-red-50 p-6 rounded-xl border border-red-100">
                                             <h3 class="font-medium text-xl text-red-800 mb-3">Acil Yardım</h3>
-                                            <p class="mb-4 text-gray-300">Acil bir durumda hemen personelimize ulaşmak için aşağıdaki düğmeyi kullanabilirsiniz.</p>
-                                            <button class="bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-6 rounded-xl flex items-center justify-center w-full transition shadow-sm hover:shadow">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                </svg>
+                                            <p class="mb-4 text-gray-700">Acil bir durumda hemen personelimize ulaşmak için aşağıdaki düğmeyi kullanabilirsiniz.</p>
+                                            <button class="btn-outline btn-red font-medium py-3 px-6 rounded-xl flex items-center justify-center w-full transition shadow-sm hover:shadow">
                                                 Acil Yardım Çağır
                                             </button>
                                         </div>
@@ -930,60 +999,45 @@
                                             <h3 class="font-medium text-xl mb-4 text-indigo-900">İletişim Seçenekleri</h3>
                                             
                                             <div class="space-y-4">
-                                                <div class="flex items-center p-4 elegant-border rounded-xl hover:bg-gray-50 transition">
-                                                    <div class="bg-indigo-100 rounded-full p-3 mr-4">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                                        </svg>
-                                                    </div>
+                                                <div class="flex items-center p-4 elegant-border rounded-xl hover:bg-gray-100 transition">
                                                     <div>
                                                         <div class="font-medium text-lg text-indigo-900">Telefon</div>
-                                                        <div class="text-gray-400 mt-1">0212 123 45 67</div>
+                                                        <div class="text-gray-700 mt-1">0212 123 45 67</div>
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="flex items-center p-4 elegant-border rounded-xl hover:bg-gray-50 transition">
-                                                    <div class="bg-indigo-100 rounded-full p-3 mr-4">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                                                        </svg>
-                                                    </div>
+                                                <div class="flex items-center p-4 elegant-border rounded-xl hover:bg-gray-100 transition">
                                                     <div>
                                                         <div class="font-medium text-lg text-indigo-900">E-posta</div>
-                                                        <div class="text-gray-400 mt-1">destek@sergi.com</div>
+                                                        <div class="text-gray-700 mt-1">destek@sergi.com</div>
                                                     </div>
                                                 </div>
                                                 
-                                                <div class="flex items-center p-4 elegant-border rounded-xl hover:bg-gray-50 transition">
-                                                    <div class="bg-indigo-100 rounded-full p-3 mr-4">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                                                        </svg>
-                                                    </div>
+                                                <div class="flex items-center p-4 elegant-border rounded-xl hover:bg-gray-100 transition">
                                                     <div>
                                                         <div class="font-medium text-lg text-indigo-900">Canlı Sohbet</div>
-                                                        <div class="text-gray-400 mt-1">Hemen başlat</div>
+                                                        <div class="text-gray-700 mt-1">Hemen başlat</div>
                                                     </div>
                                                 </button>
                                             </div>
                                         </div>
                                         
-                                        <div class="bg-indigo-50 p-6 rounded-xl">
+                                        <div class="bg-red-50 p-6 rounded-xl">
                                             <h3 class="font-medium text-xl mb-4 text-indigo-900">Geri Bildirim</h3>
-                                            <p class="mb-4 text-gray-300">Deneyiminizi iyileştirmemize yardımcı olmak için geri bildirimde bulunabilirsiniz.</p>
+                                            <p class="mb-4 text-gray-700">Deneyiminizi iyileştirmemize yardımcı olmak için geri bildirimde bulunabilirsiniz.</p>
                                             
                                             <div class="space-y-4">
                                                 <div>
-                                                    <label for="feedback-name" class="block text-sm font-medium text-gray-300 mb-2">Adınız</label>
+                                                    <label for="feedback-name" class="block text-sm font-medium text-gray-700 mb-2">Adınız</label>
                                                     <input type="text" id="feedback-name" class="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                                                 </div>
                                                 
                                                 <div>
-                                                    <label for="feedback-message" class="block text-sm font-medium text-gray-300 mb-2">Mesajınız</label>
+                                                    <label for="feedback-message" class="block text-sm font-medium text-gray-700 mb-2">Mesajınız</label>
                                                     <textarea id="feedback-message" rows="3" class="w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"></textarea>
                                                 </div>
                                                 
-                                                <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-6 rounded-xl w-full transition shadow-sm hover:shadow">Gönder</button>
+                                                <button class="btn-outline btn-red font-medium py-3 px-6 rounded-xl w-full transition shadow-sm hover:shadow">Gönder</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1030,11 +1084,16 @@
             if (voiceAssistantButton) {
                 voiceAssistantButton.addEventListener('click', function() {
                     if (voiceAssistantPanel) {
-                        voiceAssistantPanel.classList.toggle('hidden');
-                        if (!voiceAssistantPanel.classList.contains('hidden')) {
+                        voiceAssistantPanel.classList.toggle('active'); // Use 'active' class for animation
+                        if (voiceAssistantPanel.classList.contains('active')) {
                             voiceAssistantButton.classList.add('pulse-animation');
+                            // Scroll to bottom when panel opens
+                            voiceAssistantMessages.scrollTop = voiceAssistantMessages.scrollHeight;
                         } else {
                             voiceAssistantButton.classList.remove('pulse-animation');
+                            // Hide text input and animation when panel closes
+                            if (textInputArea) textInputArea.classList.add('hidden');
+                            if (listeningAnimation) listeningAnimation.classList.add('hidden');
                         }
                     }
                 });
@@ -1043,8 +1102,11 @@
             if (closeAssistant) {
                 closeAssistant.addEventListener('click', function() {
                     if (voiceAssistantPanel) {
-                        voiceAssistantPanel.classList.add('hidden');
-                        voiceAssistantButton.classList.remove('pulse-animation');
+                        voiceAssistantPanel.classList.remove('active'); // Remove 'active' class
+                        if (voiceAssistantButton) voiceAssistantButton.classList.remove('pulse-animation');
+                        // Hide text input and animation when panel closes
+                        if (textInputArea) textInputArea.classList.add('hidden');
+                        if (listeningAnimation) listeningAnimation.classList.add('hidden');
                     }
                 });
             }
@@ -1121,7 +1183,11 @@
                             "Modern Sanat Sergisi nerede?",
                             "En yakın tuvalet nerede?",
                             "Dijital Sanat sergisi hakkında bilgi verir misin?",
-                            "Tekerlekli sandalye nereden alabilirim?"
+                            "Tekerlekli sandalye nereden alabilirim?",
+                            "Duygu analizi yap", // New command
+                            "Sanatçı bilgisi ver", // New command
+                            "Merhaba, nasılsın?", // General LLM command
+                            "Sergi saatleri kaçla kaç arasında?" // General LLM command
                         ];
                         
                         const randomCommand = simulatedVoiceCommands[Math.floor(Math.random() * simulatedVoiceCommands.length)];
@@ -1131,12 +1197,7 @@
                             listeningAnimation.classList.add('hidden');
                         }
                         if (startVoiceButton) {
-                            startVoiceButton.innerHTML = `
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-                                </svg>
-                                Konuşmaya Başla
-                            `;
+                            startVoiceButton.textContent = 'Konuşmaya Başla';
                             startVoiceButton.disabled = false;
                         }
                     }, 2000);
@@ -1144,7 +1205,7 @@
             }
             
             // Respond to user messages
-            function respondToMessage(message) {
+            async function respondToMessage(message) {
                 let response = '';
                 
                 // Simple pattern matching for responses
@@ -1166,8 +1227,58 @@
                     response = 'Size nasıl yardımcı olabilirim? Sergi hakkında bilgi, yön tarifi veya erişilebilirlik özellikleri konusunda sorularınızı yanıtlayabilirim.';
                 } else if (message.includes('teşekkür')) {
                     response = 'Rica ederim! Başka bir sorunuz olursa yardımcı olmaktan memnuniyet duyarım.';
-                } else {
-                    response = 'Bu konuda size yardımcı olabilmek için daha fazla bilgiye ihtiyacım var. Lütfen sorunuzu daha detaylı bir şekilde belirtir misiniz?';
+                } else if (message.includes('duygu analizi yap')) { // New voice assistant response
+                    response = 'Duygu analizi yapılıyor... Lütfen bir görsel yüklediğinizden emin olun.';
+                    // Trigger the actual analysis if an image is loaded
+                    if (base64ImageData && analyzeEmotionButton) {
+                        analyzeEmotionButton.click();
+                        response = 'Görselin duygu analizi başlatıldı.';
+                    }
+                } else if (message.includes('sanatçı bilgisi ver')) { // New voice assistant response
+                    response = 'Sanatçı ve eser bilgisi alınıyor... Lütfen bir görsel yüklediğinizden emin olun.';
+                    // Trigger the actual info retrieval if an image is loaded
+                    if (base64ImageData && getArtworkInfoButton) {
+                        getArtworkInfoButton.click();
+                        response = 'Görselin sanatçı ve eser bilgisi başlatıldı.';
+                    }
+                }
+                else {
+                    // Fallback to LLM for general questions
+                    const thinkingMessageElement = document.createElement('div');
+                    thinkingMessageElement.className = 'voice-message assistant-message';
+                    thinkingMessageElement.innerHTML = `<p>Düşünüyorum...</p>`;
+                    voiceAssistantMessages.appendChild(thinkingMessageElement);
+                    voiceAssistantMessages.scrollTop = voiceAssistantMessages.scrollHeight;
+
+                    try {
+                        let chatHistory = [];
+                        chatHistory.push({ role: "user", parts: [{ text: message }] });
+                        const payload = { contents: chatHistory };
+                        const apiKey = "AIzaSyCEEywiObjmjA1ecwseMortdDKnt5Bwjrc"; // API Key added here
+                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+                        const apiResponse = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        const result = await apiResponse.json();
+
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            response = result.candidates[0].content.parts[0].text;
+                        } else {
+                            response = 'Üzgünüm, bu konuda size yardımcı olamıyorum. Lütfen sorunuzu daha detaylı bir şekilde belirtir misiniz?';
+                        }
+                    } catch (error) {
+                        console.error('LLM yanıt hatası:', error);
+                        response = 'Üzgünüm, bir sorun oluştu. Lütfen daha sonra tekrar deneyin.';
+                    } finally {
+                        // Remove "Düşünüyorum..." message
+                        if (thinkingMessageElement.parentNode) {
+                            thinkingMessageElement.parentNode.removeChild(thinkingMessageElement);
+                        }
+                    }
                 }
                 
                 // Add assistant response to chat
@@ -1188,13 +1299,13 @@
             const imagePreviewContainer = document.getElementById('imagePreviewContainer');
             const imagePreview = document.getElementById('imagePreview');
             const describeImageButton = document.getElementById('describeImageButton');
-            const buttonText = document.getElementById('buttonText');
-            const loadingSpinner = document.getElementById('loadingSpinner');
+            const buttonText = describeImageButton ? describeImageButton.querySelector('#buttonText') : null; // Get nested span
+            const loadingSpinner = describeImageButton ? describeImageButton.querySelector('.loading-spinner') : null; // Get nested spinner
             const descriptionOutput = document.getElementById('descriptionOutput');
             const descriptionText = document.getElementById('descriptionText');
             const copyDescriptionButton = document.getElementById('copyDescriptionButton');
-            const audioPlayerContainer = document.getElementById('audioPlayerContainer');
-            const audioPlayer = document.getElementById('audioPlayer');
+            const audioPlayerContainer = document.getElementById('audioPlayerContainer'); // Not used in this version but kept for reference
+            const audioPlayer = document.getElementById('audioPlayer'); // Not used in this version but kept for reference
             const errorMessage = document.getElementById('errorMessage');
 
             const openAskQuestionModalButton = document.getElementById('openAskQuestionModalButton');
@@ -1202,8 +1313,8 @@
             const closeAskQuestionModalButton = document.getElementById('closeAskQuestionModalButton');
             const questionInput = document.getElementById('questionInput');
             const answerQuestionButton = document.getElementById('answerQuestionButton');
-            const answerQuestionButtonText = document.getElementById('answerQuestionButtonText');
-            const answerQuestionSpinner = document.getElementById('answerQuestionSpinner');
+            const answerQuestionButtonText = answerQuestionButton ? answerQuestionButton.querySelector('#answerQuestionButtonText') : null; // Get nested span
+            const answerQuestionSpinner = answerQuestionButton ? answerQuestionButton.querySelector('.loading-spinner') : null; // Get nested spinner
             const questionOutput = document.getElementById('questionOutput');
             const answerText = document.getElementById('answerText');
             const copyAnswerButton = document.getElementById('copyAnswerButton');
@@ -1222,16 +1333,11 @@
             const showSignLanguageButton = document.getElementById('showSignLanguageButton');
             const signLanguageVideoContainer = document.getElementById('signLanguageVideoContainer');
 
-            const toggleVoiceAssistantButton = document.getElementById('toggleVoiceAssistantButton');
-            const voiceAssistantButtonText = document.getElementById('voiceAssistantButtonText');
-            const voiceAssistantStatus = document.getElementById('voiceAssistantStatus');
-            const micIcon = document.getElementById('micIcon');
-
             const descriptionLevelSelect = document.getElementById('descriptionLevel');
             const welcomeMessageDiv = document.getElementById('welcomeMessage');
 
             // QR Scanner elements
-            const openQrScannerButton = document.getElementById('openQrScannerButton');
+            const openQrScannerButton = document.getElementById('openQrScannerButton'); // This is the button within the modal content
             const qrScannerModal = document.getElementById('qrScannerModal');
             const closeQrScannerModalButton = document.getElementById('closeQrScannerModalButton');
             const video = document.getElementById('video');
@@ -1277,10 +1383,6 @@
             };
 
             const resetUI = () => {
-                // Reset elements from the original index (3).html
-                // (No specific elements to reset here, as they are part of modal content)
-
-                // Reset elements from the image-to-audio-description features
                 if (fileNameSpan) fileNameSpan.textContent = 'Görsel Seçin veya Sürükleyin';
                 if (imagePreviewContainer) imagePreviewContainer.classList.add('hidden');
                 if (imagePreview) imagePreview.src = '#';
@@ -1348,17 +1450,17 @@
                 fileInputLabel.addEventListener('dragover', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    fileInputLabel.classList.add('border-indigo-500');
+                    fileInputLabel.classList.add('border-red-500'); /* Changed */
                 });
                 fileInputLabel.addEventListener('dragleave', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    fileInputLabel.classList.remove('border-indigo-500');
+                    fileInputLabel.classList.remove('border-red-500'); /* Changed */
                 });
                 fileInputLabel.addEventListener('drop', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
-                    fileInputLabel.classList.remove('border-indigo-500');
+                    fileInputLabel.classList.remove('border-red-500'); /* Changed */
                     const files = e.dataTransfer.files;
                     if (files.length > 0 && imageUpload) {
                         imageUpload.files = files;
@@ -1425,7 +1527,7 @@
                             ],
                         };
 
-                        const apiKey = "";
+                        const apiKey = "AIzaSyCEEywiObjmjA1ecwseMortdDKnt5Bwjrc"; // API Key added here
                         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
                         const response = await fetch(apiUrl, {
@@ -1517,8 +1619,11 @@
                     if (analyzeEmotionButton) analyzeEmotionButton.disabled = true;
                     if (getArtworkInfoButton) getArtworkInfoButton.disabled = true;
 
-                    if (analyzeEmotionButton.querySelector('span')) analyzeEmotionButton.querySelector('span').textContent = 'Analiz Ediliyor...';
-                    if (analyzeEmotionButton.querySelector('svg')) analyzeEmotionButton.querySelector('svg').classList.remove('hidden');
+                    const analyzeEmotionButtonSpan = analyzeEmotionButton.querySelector('span');
+                    const analyzeEmotionButtonSpinner = analyzeEmotionButton.querySelector('.loading-spinner');
+
+                    if (analyzeEmotionButtonSpan) analyzeEmotionButtonSpan.textContent = 'Analiz Ediliyor...';
+                    if (analyzeEmotionButtonSpinner) analyzeEmotionButtonSpinner.classList.remove('hidden');
                     speak('Duygu analizi yapılıyor, lütfen bekleyin.');
 
                     const prompt = "Bu görselde hangi duygusal tonu veya ruh halini görüyorsun? Bir sanat eseri olarak bu görselin izleyicide uyandırabileceği ana duyguları ve bu duyguları destekleyen görsel öğeleri (kompozisyon, ışık, figür ifadeleri vb.) sanatsal bir dille betimle. Renkleri doğrudan isimleriyle belirtmek yerine, tonlarını ve yarattıkları etkiyi ön plana çıkar. Sadece duygusal betimlemeyi ver, başka açıklama yapma.";
@@ -1541,7 +1646,7 @@
                             ],
                         };
 
-                        const apiKey = "";
+                        const apiKey = "AIzaSyCEEywiObjmjA1ecwseMortdDKnt5Bwjrc"; // API Key added here
                         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
                         const response = await fetch(apiUrl, {
@@ -1588,8 +1693,8 @@
                         if (openAskQuestionModalButton) openAskQuestionModalButton.disabled = false;
                         if (analyzeEmotionButton) analyzeEmotionButton.disabled = false;
                         if (getArtworkInfoButton) getArtworkInfoButton.disabled = false;
-                        if (analyzeEmotionButton.querySelector('span')) analyzeEmotionButton.querySelector('span').textContent = 'Duygu Analizi ✨';
-                        if (analyzeEmotionButton.querySelector('svg')) analyzeEmotionButton.querySelector('svg').classList.add('hidden');
+                        if (analyzeEmotionButtonSpan) analyzeEmotionButtonSpan.textContent = 'Duygu Analizi';
+                        if (analyzeEmotionButtonSpinner) analyzeEmotionButtonSpinner.classList.add('hidden');
                     }
                 });
             }
@@ -1641,8 +1746,11 @@
                     if (analyzeEmotionButton) analyzeEmotionButton.disabled = true;
                     if (getArtworkInfoButton) getArtworkInfoButton.disabled = true;
 
-                    if (getArtworkInfoButton.querySelector('span')) getArtworkInfoButton.querySelector('span').textContent = 'Bilgi Alınıyor...';
-                    if (getArtworkInfoButton.querySelector('svg')) getArtworkInfoButton.querySelector('svg').classList.remove('hidden');
+                    const getArtworkInfoButtonSpan = getArtworkInfoButton.querySelector('span');
+                    const getArtworkInfoButtonSpinner = getArtworkInfoButton.querySelector('.loading-spinner');
+
+                    if (getArtworkInfoButtonSpan) getArtworkInfoButtonSpan.textContent = 'Bilgi Alınıyor...';
+                    if (getArtworkInfoButtonSpinner) getArtworkInfoButtonSpinner.classList.remove('hidden');
                     speak('Sanatçı ve eser bilgisi alınıyor, lütfen bekleyin.');
 
                     const prompt = "Bu görseldeki sanat eseri hakkında bilgi verebilir misin? Sanatçısı kim, eserin adı ne, hangi dönemde veya akımda yapılmış, kısa bir tarihsel veya sanatsal bağlamını açıkla. Görme engelli bir bireye sergide rehberlik ediyormuş gibi anlat. Sadece eserin ve sanatçının bilgisini ver, başka açıklama yapma.";
@@ -1665,7 +1773,7 @@
                             ],
                         };
 
-                        const apiKey = "";
+                        const apiKey = "AIzaSyCEEywiObjmjA1ecwseMortdDKnt5Bwjrc"; // API Key added here
                         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
                         const response = await fetch(apiUrl, {
@@ -1704,8 +1812,8 @@
                         if (openAskQuestionModalButton) openAskQuestionModalButton.disabled = false;
                         if (analyzeEmotionButton) analyzeEmotionButton.disabled = false;
                         if (getArtworkInfoButton) getArtworkInfoButton.disabled = false;
-                        if (getArtworkInfoButton.querySelector('span')) getArtworkInfoButton.querySelector('span').textContent = 'Sanatçı ve Eser Bilgisi ✨';
-                        if (getArtworkInfoButton.querySelector('svg')) getArtworkInfoButton.querySelector('svg').classList.add('hidden');
+                        if (getArtworkInfoButtonSpan) getArtworkInfoButtonSpan.textContent = 'Sanatçı ve Eser Bilgisi';
+                        if (getArtworkInfoButtonSpinner) getArtworkInfoButtonSpinner.classList.add('hidden');
                     }
                 });
             }
@@ -1822,7 +1930,7 @@
                             ],
                         };
 
-                        const apiKey = "";
+                        const apiKey = "AIzaSyCEEywiObjmjA1ecwseMortdDKnt5Bwjrc"; // API Key added here
                         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
                         const response = await fetch(apiUrl, {
@@ -1852,7 +1960,7 @@
                         console.error('Soru cevaplama hatası:', error);
                         if (questionErrorMessage) {
                             questionErrorMessage.textContent = 'Bir hata oluştu. Lütfen ağ bağlantınızı kontrol edin veya daha sonra tekrar deneyin.';
-                            questionErrorMessage.classList.remove('hidden');
+                            errorMessage.classList.remove('hidden');
                         }
                         speak('Bir hata oluştu. Lütfen ağ bağlantınızı kontrol edin veya daha sonra tekrar deneyin.');
                     } finally {
@@ -1893,46 +2001,46 @@
 
                 recognition.onstart = () => {
                     isListening = true;
-                    if (voiceAssistantButtonText) voiceAssistantButtonText.textContent = 'Dinleniyor...';
-                    if (voiceAssistantStatus) {
-                        voiceAssistantStatus.textContent = 'Aktif (Dinleniyor...)';
-                        voiceAssistantStatus.classList.add('listening');
+                    // Show listening animation
+                    if (listeningAnimation) listeningAnimation.classList.remove('hidden');
+                    if (startVoiceButton) {
+                        startVoiceButton.textContent = 'Dinleniyor...';
+                        startVoiceButton.disabled = true;
                     }
-                    if (micIcon) micIcon.classList.add('mic-icon-active');
-                    console.log('Voice assistant started listening.');
                     speak('Sesli asistan dinlemeye başladı.');
                 };
 
                 recognition.onend = () => {
                     isListening = false;
-                    if (voiceAssistantButtonText) voiceAssistantButtonText.textContent = 'Sesli Asistanı Başlat';
-                    if (voiceAssistantStatus) {
-                        voiceAssistantStatus.textContent = 'Kapalı';
-                        voiceAssistantStatus.classList.remove('listening');
+                    // Hide listening animation
+                    if (listeningAnimation) listeningAnimation.classList.add('hidden');
+                    if (startVoiceButton) {
+                        startVoiceButton.textContent = 'Konuşmaya Başla';
+                        startVoiceButton.disabled = false;
                     }
-                    if (micIcon) micIcon.classList.remove('mic-icon-active');
                     console.log('Voice assistant stopped listening.');
                 };
 
                 recognition.onerror = (event) => {
                     console.error('Speech recognition error:', event.error);
-                    if (voiceAssistantStatus) voiceAssistantStatus.textContent = `Hata: ${event.error}`;
                     speak(`Ses tanıma hatası: ${event.error}. Lütfen tekrar deneyin.`);
                     isListening = false;
-                    if (voiceAssistantButtonText) voiceAssistantButtonText.textContent = 'Sesli Asistanı Başlat';
-                    if (voiceAssistantStatus) voiceAssistantStatus.classList.remove('listening');
-                    if (micIcon) micIcon.classList.remove('mic-icon-active');
+                    if (listeningAnimation) listeningAnimation.classList.add('hidden');
+                    if (startVoiceButton) {
+                        startVoiceButton.textContent = 'Konuşmaya Başla';
+                        startVoiceButton.disabled = false;
+                    }
                 };
 
                 recognition.onresult = (event) => {
                     const transcript = event.results[0][0].transcript.toLowerCase().trim();
                     console.log('Tanınan komut:', transcript);
-                    if (voiceAssistantStatus) voiceAssistantStatus.textContent = `Komut: "${transcript}"`;
-                    processVoiceCommand(transcript);
+                    sendMessage(transcript); // Send recognized speech as user message
                 };
 
-                if (toggleVoiceAssistantButton) {
-                    toggleVoiceAssistantButton.addEventListener('click', () => {
+                // The floating voice assistant button now directly controls recognition
+                if (voiceAssistantButton) {
+                    voiceAssistantButton.addEventListener('click', () => {
                         if (isListening) {
                             recognition.stop();
                         } else {
@@ -1942,9 +2050,9 @@
                 }
 
             } else {
-                if (toggleVoiceAssistantButton) toggleVoiceAssistantButton.disabled = true;
-                if (voiceAssistantButtonText) voiceAssistantButtonText.textContent = 'Tarayıcınız Sesli Asistanı Desteklemiyor';
-                if (voiceAssistantStatus) voiceAssistantStatus.textContent = 'Desteklenmiyor';
+                if (voiceAssistantButton) {
+                    voiceAssistantButton.style.display = 'none'; // Hide if not supported
+                }
                 console.warn('Web Speech API (SpeechRecognition) tarayıcınızda desteklenmiyor.');
             }
 
@@ -1985,7 +2093,8 @@
                 } else if (command.includes('işaret dilini göster') || command.includes('işaret dilini aç')) {
                     if (showSignLanguageButton) showSignLanguageButton.click();
                 } else if (command.includes('qr kodu tara') || command.includes('kare kodu oku')) {
-                    if (openQrScannerButton) openQrScannerButton.click();
+                    const qrScannerCard = document.querySelector('[data-feature="qr-scanner"]');
+                    if(qrScannerCard) qrScannerCard.click();
                 }
                 else if (command.includes('temizle') || command.includes('uygulamayı temizle')) {
                     resetUI();
@@ -2038,15 +2147,18 @@
                     speak('Yardım ve destek ekranı açıldı.');
                 }
                 else {
-                    speak('Anlayamadım, lütfen tekrar edin.');
+                    // Fallback to LLM for general questions
+                    respondToMessage(command); // This will call the LLM
                 }
             };
 
             // --- QR Scanner Logic ---
             let stream; // To hold the camera stream
 
-            if (openQrScannerButton) {
-                openQrScannerButton.addEventListener('click', () => {
+            // This openQrScannerButton is the one inside the modal content, not the feature card
+            const startModalQrScannerButton = document.getElementById('startModalQrScannerButton');
+            if (startModalQrScannerButton) {
+                startModalQrScannerButton.addEventListener('click', () => {
                     if (qrScannerModal) qrScannerModal.style.display = 'flex';
                     if (qrStatus) qrStatus.textContent = 'Kamera başlatılıyor...';
                     if (qrErrorMessage) qrErrorMessage.classList.add('hidden');
@@ -2074,6 +2186,7 @@
                         });
                 });
             }
+
 
             if (closeQrScannerModalButton) {
                 closeQrScannerModalButton.addEventListener('click', () => {
@@ -2162,6 +2275,24 @@
                     resetUI(); // Clear everything if artwork not found
                 }
             }
+
+            // Tab Switching Logic
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.dataset.tab;
+
+                    // Deactivate all buttons and hide all content
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Activate the clicked button and show its content
+                    button.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
+            });
         });
     </script>
 </body>
